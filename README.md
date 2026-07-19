@@ -117,6 +117,10 @@ their defaults in `config/config.php`:
 - `FINGERPRINT_READER_PROTOCOL` defaults to `ws`
 - `FINGERPRINT_READER_CLIENT_PATH` defaults to `dpfpcapture`
 
+If Windows cannot see the fingerprint reader, install the required drivers first:
+- https://crossmatch.hid.gl/lite-client/
+- https://www.hidglobal.com/drivers/49061
+
 In production, replace the JavaScript simulation in:
 - `modules/students/enroll.php` — enrollment capture
 - `modules/attendance/verify.php` — live verification scan
