@@ -475,6 +475,16 @@ function setInsightFaceHealthUi(state, detail) {
     el.style.borderColor = theme.border;
 }
 
+function fingerprintDriverHelpText(readerUrl) {
+    return [
+        'No fingerprint reader detected at ' + readerUrl + '.',
+        'If the device is not visible, install the required HID/Crossmatch drivers:',
+        'https://crossmatch.hid.gl/lite-client/',
+        'https://www.hidglobal.com/drivers/49061',
+        'Then reconnect the reader and try again.',
+    ].join(' ');
+}
+
 async function probeInsightFaceHealth() {
     const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timeoutId = controller ? setTimeout(() => controller.abort(), INSIGHTFACE_HEALTH_TIMEOUT_MS) : null;
@@ -522,7 +532,7 @@ async function initReader() {
         const readers = await getFingerprintReader().refreshReaders();
         readerReady = Array.isArray(readers) && readers.length > 0;
         if (!readerReady) {
-            showScanResult('error', 'No fingerprint reader detected at ' + readerUrl + '. ' + (readerLastMessage || 'Connect the reader and try again.'));
+            showScanResult('error', fingerprintDriverHelpText(readerUrl) + ' ' + (readerLastMessage || 'Connect the reader and try again.'));
             return false;
         }
         document.getElementById('scanBtn').disabled = false;
@@ -535,7 +545,13 @@ async function initReader() {
         document.getElementById('scanBtn').disabled = false;
         document.getElementById('scanBtnLabel').textContent = 'Retry Connection';
         document.getElementById('scanBtn').title = 'Try connecting to the fingerprint reader again';
-        showScanResult('error', 'Cannot reach DigitalPersona bridge at ' + readerUrl + '. ' + (e?.message || 'Communication failed.'));
+        showScanResult(
+            'error',
+            'Cannot reach DigitalPersona bridge at ' + readerUrl + '. ' +
+            'If the reader is not seen by Windows, install the required drivers: ' +
+            'https://crossmatch.hid.gl/lite-client/ and https://www.hidglobal.com/drivers/49061. ' +
+            (e?.message || 'Communication failed.')
+        );
         return false;
     }
 }
