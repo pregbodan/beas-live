@@ -9,17 +9,22 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       libgomp1 \
-       libglib2.0-0 \
-       libgl1 \
-       libsm6 \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
+    cmake \
+    git \
+    libgomp1 \
+    libglib2.0-0 \
+    libgl1 \
+    libsm6 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
 
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY service.py /app/service.py
 COPY python /app/python
 
