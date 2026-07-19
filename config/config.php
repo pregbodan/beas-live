@@ -1,17 +1,17 @@
 <?php
 // BEAS - Database Configuration
-define('DB_HOST', getenv('DB_HOST') ?: 'mysql.tikearn.org.ng');
-define('DB_USER', getenv('DB_USER') ?: 'tikearno_pregbodan');
-define('DB_PASS', getenv('DB_PASS') ?: 'AdebomiAdebomi@1');
-define('DB_NAME', getenv('DB_NAME') ?: 'tikearno_beas');
-define('DB_PORT', getenv('DB_PORT') ?: '3306');
+define('DB_HOST', getenv('DB_HOST') ?: 'mysql-beas-pregbodan-b627.j.aivencloud.com');
+define('DB_USER', getenv('DB_USER') ?: 'avnadmin');
+define('DB_PASS', getenv('DB_PASS') ?: 'AVNS_V-Ryj7HKOEJqznO2YfE');
+define('DB_NAME', getenv('DB_NAME') ?: 'defaultdb');
+define('DB_PORT', getenv('DB_PORT') ?: '17172');
 
 define('APP_NAME', 'BEAS');
 define('APP_FULL_NAME', 'Biometric Examination Authentication System');
 define('APP_INSTITUTION', 'Federal University Oye-Ekiti');
 define('APP_DEPARTMENT', 'Department of Computer Engineering');
 define('APP_VERSION', '1.0.0');
-define('APP_URL', getenv('APP_URL') ?: 'https://tikearn.org.ng/beas');
+define('APP_URL', getenv('APP_URL') ?: 'https://beas-live.fly.dev');
 
 define('SESSION_LIFETIME', 3600);
 
