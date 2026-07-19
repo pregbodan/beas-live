@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             sanitize($_POST['full_name']),
             $_POST['role'] ?? 'admin'
         ]);
-        redirect($_SERVER['PHP_SELF'], 'User created successfully');
+        redirect(APP_URL . '/modules/admin/users.php', 'User created successfully');
     } elseif ($action === 'toggle') {
         $db->prepare("UPDATE users SET isActive=NOT isActive WHERE id=?")->execute([(int)$_POST['id']]);
-        redirect($_SERVER['PHP_SELF']);
+        redirect(APP_URL . '/modules/admin/users.php');
     }
 }
 
