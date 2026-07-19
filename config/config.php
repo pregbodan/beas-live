@@ -62,7 +62,4 @@ function getDB(): PDO {
     }
     return $pdo;
 }
-?>
-
-
 

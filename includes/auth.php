@@ -97,4 +97,3 @@ function timeAgo(string $datetime): string {
     if ($diff < 86400)  return floor($diff/3600) . 'h ago';
     return date('d M Y', $ts);
 }
-?>
