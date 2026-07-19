@@ -359,20 +359,12 @@ async function initFingerprintReader() {
         const readers = await getFingerprintReader().refreshReaders();
         readerReady = Array.isArray(readers) && readers.length > 0;
         if (!readerReady) {
-            log(
-                'No fingerprint readers detected. Install the required drivers if Windows cannot see the scanner: ' +
-                'https://crossmatch.hid.gl/lite-client/ and https://www.hidglobal.com/drivers/49061',
-                'warn'
-            );
+            log('No fingerprint readers detected. Connect the scanner and try again.', 'warn');
         }
         return readerReady;
     } catch (error) {
         readerReady = false;
-        log(
-            (error?.message || String(error || 'Fingerprint communication failed.')) +
-            ' If the device is not visible, install: https://crossmatch.hid.gl/lite-client/ and https://www.hidglobal.com/drivers/49061',
-            'error'
-        );
+        log(error?.message || String(error || 'Fingerprint communication failed.'), 'error');
         return false;
     }
 }
