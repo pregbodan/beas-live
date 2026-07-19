@@ -1,6 +1,6 @@
 <?php
 // BEAS - Database Configuration
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_HOST', getenv('DB_HOST') ?: 'mysql.tikearn.org.ng');
 define('DB_USER', getenv('DB_USER') ?: 'tikearno_pregbodan');
 define('DB_PASS', getenv('DB_PASS') ?: 'AdebomiAdebomi@1');
 define('DB_NAME', getenv('DB_NAME') ?: 'tikearno_beas');
