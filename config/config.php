@@ -1,7 +1,4 @@
 <?php
-if (ob_get_level() === 0) {
-    ob_start();
-}
 // BEAS - Database Configuration
 define('DB_HOST', getenv('DB_HOST') ?: 'mysql-beas-pregbodan-b627.j.aivencloud.com');
 define('DB_USER', getenv('DB_USER') ?: 'avnadmin');
