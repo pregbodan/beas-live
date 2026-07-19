@@ -1,0 +1,18 @@
+﻿        if (!core.WebSdk.debug) return;
+            return sessionStorage.getItem("websdk.sessionId");
+            return sessionStorage.setItem("websdk.sessionId", value);
+            uri = "https://127.0.0.1:" + core.WebSdk.port + "/get_connection";
+            switch (core.WebSdk.version) {
+            switch (core.WebSdk.version) {
+        core.log("WebSdkVersion: ", core.WebSdk.version, "clientPath: ", clientPath);
+            type: 'sdk.focusChanged',
+        if (core.WebSdk.version >= core.WebSdkEncryptionSupport.AESEncryption && !cipher.isCryptoSupported())
+            core.WebSdk.version = core.WebSdkEncryptionSupport.Encryption; // if AES encryption is not supported by Browser, set data encryption to old one.
+            version: core.WebSdk.version.toString()
+                core.WebSdk.version = Math.min(core.WebSdk.version, core.WebSdkEncryptionSupport.Encryption);
+            else core.WebSdk.version = response.version;
+                connectionUrl += "&version=" + core.WebSdk.version.toString();
+            core.WebSdk.debug = webChannelOptions.debug;
+            core.WebSdk.version = webChannelOptions.version;
+            core.WebSdk.port = webChannelOptions.port;
+    core.log('loaded websdk.client.ui');

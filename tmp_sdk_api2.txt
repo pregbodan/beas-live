@@ -1,0 +1,121 @@
+﻿            uri = "https://127.0.0.1:" + core.WebSdk.port + "/get_connection";
+    Configurator.prototype.tryParse = function (connectionString) {
+        core.log("Configurator: tryParse " + connectionString);
+        urlEl.href = connectionString;
+    function WebChannelOptions(options) {
+            reconnectAlways = options.reconnectAlways === true,
+            "reconnectAlways": {
+                get: function () { return reconnectAlways; },
+                set: function (value) { reconnectAlways = value; },
+    return WebChannelOptions;
+    function WebChannelClientImpl(clientPath) {
+        this.wsReconnectInterval = 5000;
+        this.reconnectTimer = null;
+        this.onConnectionFailed = null;
+        this.onConnectionSucceed = null;
+        this.onDataReceivedBin = null;
+        this.onDataReceivedTxt = null;
+                self.resetReconnectTimer();
+    WebChannelClientImpl.prototype.notifyFocusChanged = function(isFocused) {
+        if (!this.isConnected()) return;
+        core.log('WebChannelClientImpl: notifyFocusChanged ->', isFocused);
+    WebChannelClientImpl.prototype.fireConnectionFailed = function() {
+            this.setReconnectTimer();
+        if (this.onConnectionFailed) {
+            this.onConnectionFailed();
+    WebChannelClientImpl.prototype.fireConnectionSucceed = function() {
+        if (this.onConnectionSucceed) {
+            this.onConnectionSucceed();
+    WebChannelClientImpl.prototype.resetReconnectTimer = function() {
+        if (this.reconnectTimer) {
+            clearInterval(this.reconnectTimer);
+            this.reconnectTimer = null;
+    WebChannelClientImpl.prototype.setReconnectTimer = function() {
+        this.resetReconnectTimer();
+        this.reconnectTimer = setInterval(function() {
+            self.connectInternal();
+        }, this.wsReconnectInterval);
+    * Connects to web socket server and setups all event listeners
+    WebChannelClientImpl.prototype.wsconnect = function(url) {
+        core.log("WebChannelClientImpl: wsconnect " + url);
+            throw new Error("wsdisconnect has not been called");
+            core.log("WebChannelClientImpl: wsonclose");
+            core.log("WebChannelClientImpl: wsonopen");
+            core.log("WebChannelClientImpl: wsonerror " + arguments);
+            return $q.reject(new Error("WebSocket connection failed."));
+    * Closes web socket connection and cleans up all event listeners
+    WebChannelClientImpl.prototype.wsdisconnect = function() {
+    WebChannelClientImpl.prototype.wsonclose = function(isFailed) {
+        core.log("WebChannelClientImpl: connection closed");
+            this.fireConnectionFailed();
+    WebChannelClientImpl.prototype.wsonmessage = function(event) {
+                if (self.onDataReceivedTxt) {
+                    self.onDataReceivedTxt(data);
+                if (self.onDataReceivedBin) {
+                    self.onDataReceivedBin(data);
+    WebChannelClientImpl.prototype.wssend = function(data) {
+        if (!this.isConnected())
+    WebChannelClientImpl.prototype.generateSessionKey = function(callback) {
+        utils.ajax('post', configurator.url + '/connect', {
+    * Sets up connection with parameters from configurator (generates session key and connects to websocket server).
+    WebChannelClientImpl.prototype.setupSecureChannel = function(callback) {
+        core.log('WebChannelClientImpl.setupSecureChannel');
+                var connectionUrl = configurator.url.replace('http', 'ws') +
+                connectionUrl += "&sessionId=" + configurator.sessionId;
+                connectionUrl += "&version=" + core.WebSdk.version.toString();
+                self.wsconnect(connectionUrl)
+    WebChannelClientImpl.prototype.isConnected = function() {
+    WebChannelClientImpl.prototype.sendData = function(data) {
+    WebChannelClientImpl.prototype.deactivateBufferCheck = function() {
+    WebChannelClientImpl.prototype.activateBufferCheck = function() {
+    * Sends messages from a queue if any. Initiates secure connection if needed and has not been yet initiated.
+    WebChannelClientImpl.prototype.processMessageQueue = function() {
+        core.log("WebChannelClientImpl: processMessageQueue " + this.queue.length);
+    WebChannelClientImpl.prototype.connectInternal = function(attempts) {
+        core.log('WebChannelClientImpl.connectInternal');
+        this.resetReconnectTimer();
+            if (err) return self.fireConnectionFailed();
+            self.fireConnectionSucceed();
+    WebChannelClientImpl.prototype.connect = function(attempts) {
+        this.connectInternal(attempts);
+    WebChannelClientImpl.prototype.disconnect = function() {
+        this.resetReconnectTimer();
+        this.wsdisconnect();
+    WebChannelClientImpl.prototype.sendDataBin = function (data) {
+    WebChannelClientImpl.prototype.sendDataTxt = function(data) {
+    return WebChannelClientImpl;
+})(function (core, WebChannelOptions, WebChannelClientImpl) {
+    function WebChannelClient(clientPath, options) {
+            var webChannelOptions = new WebChannelOptions(options);
+            core.WebSdk.debug = webChannelOptions.debug;
+            core.WebSdk.version = webChannelOptions.version;
+            core.WebSdk.port = webChannelOptions.port;
+        var client = new WebChannelClientImpl(clientPath);
+            "onConnectionFailed": {
+                get: function () { return client.onConnectionFailed; },
+                set: function (value) { client.onConnectionFailed = value; },
+            "onConnectionSucceed": {
+                get: function () { return client.onConnectionSucceed; },
+                set: function (value) { client.onConnectionSucceed = value; },
+            "onDataReceivedBin": {
+                get: function () { return client.onDataReceivedBin; },
+                set: function (value) { client.onDataReceivedBin = value; },
+            "onDataReceivedTxt": {
+                get: function () { return client.onDataReceivedTxt; },
+                set: function (value) { client.onDataReceivedTxt = value; },
+        this.connect = function (attempts = 3) {
+            client.connect(attempts);
+        this.disconnect = function () {
+            client.disconnect();
+        this.isConnected = function () {
+            return client.isConnected();
+        this.sendDataBin = function (data) {
+            client.sendDataBin(data);
+        this.sendDataTxt = function (data) {
+            client.sendDataTxt(data);
+        this.resetReconnectTimer = function () {
+            client.resetReconnectTimer();
+    return WebChannelClient;
+})(function (core, WebChannelOptions, WebChannelClient) {
+        WebChannelOptions: WebChannelOptions,
+        WebChannelClient: WebChannelClient

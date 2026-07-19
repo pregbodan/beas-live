@@ -1,0 +1,1 @@
+[18-Jul-2026 15:57:23 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tikearno/public_html/beas/includes/header.php:72) in /home/tikearno/public_html/beas/includes/auth.php on line 84

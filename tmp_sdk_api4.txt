@@ -1,0 +1,32 @@
+﻿    // capture the global reference to guard against fakeTimer mocks
+        // Verify presence of username.
+            // Verify presence of parameters.
+            // Verify presence of parameters.
+            // Verify presence of parameters.
+            // Verify value of A and B.
+            // Verify presence of parameter.
+            // Verify presence of parameters.
+            // Verify value of A and B.
+            // Verify presence of parameters.
+            // Verify value of A and B.
+            // Verify presence of parameters.
+            // Verify value of A and B.
+            // Verify presence of parameters.
+            // Verify value of B.
+            // Verify random number large enough.
+            // Verify presence of parameters.
+            // Verify presence of parameters.
+            // Verify value of A and B.
+            var fileReader = new FileReader();
+            fileReader.onload = function (event) {
+            fileReader.onerror = function (event) {
+            fileReader.readAsText(blob, 'utf-16');
+    function WebChannelClientImpl(clientPath) {
+        if (!clientPath)
+            throw new Error("clientPath cannot be empty");
+        core.log("WebSdkVersion: ", core.WebSdk.version, "clientPath: ", clientPath);
+        this.clientPath = clientPath;
+                    '/' + self.clientPath +
+    function WebChannelClient(clientPath, options) {
+        var client = new WebChannelClientImpl(clientPath);
+                get: function () { return clientPath; },

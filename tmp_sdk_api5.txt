@@ -1,0 +1,15 @@
+﻿        window.WebSdkCore = factory();
+        if (!window.WebSdkCore)
+      window.WebSdkCore.utils = factory(window.WebSdkCore);
+        if (!window.WebSdkCore)
+        window.WebSdkCore.configurator = factory(window.WebSdkCore, window.WebSdkCore.utils);
+        if (!window.WebSdkCore)
+        window.WebSdkCore.cipher = factory(window.WebSdkCore);
+        var core = window.WebSdkCore;
+        window.WebSdkCore.channelOptions = factory(core);
+        var core = window.WebSdkCore;
+        window.WebSdkCore.channelClientImplementation = factory(async, sjcl, BigInteger, SRPClient, core, core.utils, core.configurator, core.cipher);
+		var core = window.WebSdkCore;
+		window.WebSdkCore.channelClient = factory(core, core.channelOptions, core.channelClientImplementation);
+        var core = window.WebSdkCore;
+        window.WebSdk = factory(core, core.channelOptions, core.channelClient);

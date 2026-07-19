@@ -1,0 +1,59 @@
+﻿        define('WebSdkCore', [], factory);
+        window.WebSdkCore = factory();
+        define('WebSdkCore.utils', [
+            'WebSdkCore'
+        if (!window.WebSdkCore)
+            throw new Error("WebSdkCore is not loaded.");
+      window.WebSdkCore.utils = factory(window.WebSdkCore);
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+        define('WebSdkCore.configurator', [
+            'WebSdkCore',
+            'WebSdkCore.utils'
+        if (!window.WebSdkCore)
+            throw new Error("WebSdkCore is not loaded.");
+        window.WebSdkCore.configurator = factory(window.WebSdkCore, window.WebSdkCore.utils);
+            uri = "https://127.0.0.1:" + core.WebSdk.port + "/get_connection";
+        define('WebSdkCore.cipher', [
+            'WebSdkCore'
+        if (!window.WebSdkCore)
+            throw new Error("WebSdkCore is not loaded.");
+        window.WebSdkCore.cipher = factory(window.WebSdkCore);
+            var fileReader = new FileReader();
+            fileReader.onload = function (event) {
+            fileReader.onerror = function (event) {
+            fileReader.readAsText(blob, 'utf-16');
+        define('WebSdkCore.channelOptions', [
+            'WebSdkCore'
+        var core = window.WebSdkCore;
+            throw new Error("WebSdkCore is not loaded.");
+        window.WebSdkCore.channelOptions = factory(core);
+        define('WebSdkCore.channelClientImplementation', [
+            'WebSdkCore',
+            'WebSdkCore.utils',
+            'WebSdkCore.configurator',
+            'WebSdkCore.cipher'
+        var core = window.WebSdkCore;
+            throw new Error("WebSdkCore is not loaded.");
+        window.WebSdkCore.channelClientImplementation = factory(async, sjcl, BigInteger, SRPClient, core, core.utils, core.configurator, core.cipher);
+    function WebChannelClientImpl(clientPath) {
+        if (!clientPath)
+            throw new Error("clientPath cannot be empty");
+        core.log("WebSdkVersion: ", core.WebSdk.version, "clientPath: ", clientPath);
+        this.clientPath = clientPath;
+                    '/' + self.clientPath +
+		define('WebSdkCore.channelClient', [
+            'WebSdkCore',
+            'WebSdkCore.channelOptions',
+            'WebSdkCore.channelClientImplementation'
+		var core = window.WebSdkCore;
+			throw new Error("WebSdkCore is not loaded.");
+		window.WebSdkCore.channelClient = factory(core, core.channelOptions, core.channelClientImplementation);
+    function WebChannelClient(clientPath, options) {
+        var client = new WebChannelClientImpl(clientPath);
+            "path": {
+                get: function () { return clientPath; },
+            'WebSdkCore',
+            'WebSdkCore.channelOptions',
+            'WebSdkCore.channelClient',
+        var core = window.WebSdkCore;
+            throw new Error("WebSdkCore is not loaded.");
