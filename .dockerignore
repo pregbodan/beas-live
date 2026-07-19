@@ -1,0 +1,13 @@
+.git
+.agents
+.kilo
+node_modules
+digitalpersona-fingerprint
+uploads/*.png
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.webp
+api/error_log
+modules/admin/error_log
+tmp_*
+*.log
