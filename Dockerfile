@@ -16,6 +16,9 @@ RUN a2enmod rewrite headers \
     && docker-php-ext-install -j"$(nproc)" pdo_mysql gd zip \
     && rm -rf /var/lib/apt/lists/*
 
+RUN echo "DirectoryIndex index.php index.html" > /etc/apache2/conf-available/directoryindex.conf \
+    && a2enconf directoryindex
+
 RUN sed -ri "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf /etc/apache2/apache2.conf \
     && sed -ri "s/Listen 80/Listen ${PORT}/g" /etc/apache2/ports.conf \
     && sed -ri "s/:80>/:${PORT}>/g" /etc/apache2/sites-available/*.conf
