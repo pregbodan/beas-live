@@ -11,7 +11,7 @@ define('APP_FULL_NAME', 'Biometric Examination Authentication System');
 define('APP_INSTITUTION', 'Federal University Oye-Ekiti');
 define('APP_DEPARTMENT', 'Department of Computer Engineering');
 define('APP_VERSION', '1.0.0');
-define('APP_URL', getenv('APP_URL') ?: 'https://beas-live.fly.dev');
+define('APP_URL', getenv('APP_URL') ?: 'https://beas-live.onrender.com/');
 
 define('SESSION_LIFETIME', 3600);
 
