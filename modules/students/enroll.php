@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// â”€â”€ Pre-compute all PHP values needed in JS (avoids heredoc PHP tags) â”€â”€â”€â”€â”€â”€
+// Pre-compute all PHP values needed in JS (avoids heredoc PHP tags)
 $jsInitCount    = $student
     ? ((int)!empty($student['thumbTemplate']) + (int)!empty($student['indexTemplate']))
     : 0;
@@ -136,7 +136,7 @@ $jsExistingJson = json_encode($jsExistingData);
         <h1 class="page-title"><?= $student ? 'Edit Student' : 'Enroll New Student' ?></h1>
         <p class="page-subtitle">Register student biometrics and academic profile</p>
     </div>
-    <a href="<?= APP_URL ?>/modules/students/index.php" class="btn btn--ghost">â† Back</a>
+    <a href="<?= APP_URL ?>/modules/students/index.php" class="btn btn--ghost">&larr; Back</a>
 </div>
 
 <?php if ($error): ?><div class="alert alert--error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
@@ -144,7 +144,7 @@ $jsExistingJson = json_encode($jsExistingData);
 <!-- U.are.U 4500 Status Bar -->
 <div id="readerStatusBar" style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;margin-bottom:20px;font-size:.82rem">
     <div id="readerIndicator" style="width:10px;height:10px;border-radius:50%;background:var(--text-muted);flex-shrink:0"></div>
-    <span id="readerStatusText" style="color:var(--text-muted)">Initialising U.are.U 4500 readerâ€¦</span>
+    <span id="readerStatusText" style="color:var(--text-muted)">Initialising U.are.U 4500 reader...</span>
     <span style="margin-left:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted)">HID Authentication Service</span>
 </div>
 
@@ -154,7 +154,7 @@ $jsExistingJson = json_encode($jsExistingData);
 <?php endif; ?>
 <div class="grid-2" style="gap:20px;align-items:start">
 
-    <!-- â”€â”€ Left: Bio Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Left: Bio Data -->
     <div>
         <div class="card" style="margin-bottom:20px">
             <div class="card-header"><span class="card-title">Personal Information</span></div>
@@ -202,7 +202,7 @@ $jsExistingJson = json_encode($jsExistingData);
                     <div class="form-group">
                         <label class="form-label">Department <span>*</span></label>
                         <select name="department" class="form-control" required>
-                            <option value="">Selectâ€¦</option>
+                            <option value="">Select...</option>
                             <?php foreach (['Computer Engineering','Electrical Engineering','Mechanical Engineering','Civil Engineering'] as $dept): ?>
                             <option value="<?= $dept ?>" <?= ($student['department']??'')===$dept?'selected':'' ?>><?= $dept ?></option>
                             <?php endforeach; ?>
@@ -215,7 +215,7 @@ $jsExistingJson = json_encode($jsExistingData);
                     <div class="form-group">
                         <label class="form-label">Level <span>*</span></label>
                         <select name="level" class="form-control" required>
-                            <option value="">Selectâ€¦</option>
+                            <option value="">Select...</option>
                             <?php foreach ([100,200,300,400,500] as $l): ?>
                             <option value="<?= $l ?>" <?= ($student['level']??'')==$l?'selected':'' ?>><?= $l ?> Level</option>
                             <?php endforeach; ?>
@@ -270,11 +270,11 @@ $jsExistingJson = json_encode($jsExistingData);
         </div>
     </div>
 
-    <!-- â”€â”€ Right: Fingerprint â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Right: Fingerprint -->
     <div>
         <div class="card" style="margin-bottom:20px">
             <div class="card-header">
-                <span class="card-title">Fingerprint Capture â€” U.are.U 4500</span>
+                <span class="card-title">Fingerprint Capture - U.are.U 4500</span>
                 <span id="fpStatus" class="badge badge--muted">Not Captured</span>
             </div>
             <div class="card-body">
@@ -297,7 +297,7 @@ $jsExistingJson = json_encode($jsExistingData);
                             <path d="M9 12c0-1.66 1.34-3 3-3s3 1.34 3 3v4"/>
                         </svg>
                         <span><?= $label ?></span>
-                        <div class="finger-indicator" id="indicator-<?= $key ?>"><?= $isCaptured ? 'âœ“' : 'Â·' ?></div>
+                        <div class="finger-indicator" id="indicator-<?= $key ?>"><?= $isCaptured ? '&#10003;' : '&middot;' ?></div>
                     </button>
                     <?php endforeach; ?>
                 </div>
@@ -322,7 +322,7 @@ $jsExistingJson = json_encode($jsExistingData);
                             <path d="M32 24c-4.4 0-8 3.6-8 8 0 2.7 1.3 5.1 3.3 6.6"/>
                             <circle cx="32" cy="32" r="2" fill="#555A72"/>
                         </svg>
-                        <div id="scanMsg" style="font-size:.85rem;color:var(--text-secondary);text-align:center;padding:0 20px">Place finger on U.are.U 4500 reader,<br>then click Scan</div>
+                        <div id="scanMsg" style="font-size:.85rem;color:var(--text-secondary);text-align:center;padding:0 20px">Place finger on the U.are.U 4500 reader,<br>then click Scan</div>
                         <div id="scanSubMsg" style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)">MINDTCT minutiae extraction ready</div>
                         <!-- Quality meter -->
                         <div id="qualityMeter" style="display:none;width:200px">
@@ -330,7 +330,7 @@ $jsExistingJson = json_encode($jsExistingData);
                             <div style="height:5px;background:var(--bg-hover);border-radius:3px;overflow:hidden">
                                 <div id="qualityBar" style="height:100%;width:0%;background:var(--signal);border-radius:3px;transition:width .6s ease"></div>
                             </div>
-                            <div id="qualityLabel" style="font-size:.7rem;color:var(--signal);text-align:center;margin-top:3px;font-family:var(--font-mono)">â€”</div>
+                            <div id="qualityLabel" style="font-size:.7rem;color:var(--signal);text-align:center;margin-top:3px;font-family:var(--font-mono)">&mdash;</div>
                         </div>
                         <!-- Minutiae count -->
                         <div id="minutiaeCount" style="display:none;font-size:.72rem;font-family:var(--font-mono);color:var(--electric)"></div>
@@ -352,7 +352,7 @@ $jsExistingJson = json_encode($jsExistingData);
 
                 <div id="scanProgress" style="display:none" class="alert alert--warning">
                     <div class="spinner" style="width:15px;height:15px;margin-right:8px;flex-shrink:0"></div>
-                    <span id="scanProgressMsg">Waiting for finger placementâ€¦</span>
+                    <span id="scanProgressMsg">Waiting for finger placement...</span>
                 </div>
                 <div id="scanResult" style="display:none"></div>
 
@@ -411,7 +411,7 @@ function setReaderStatus(state, msg) {
 }
 
 // ============================================================
-// U.are.U 4500  â€”  DigitalPersona Web SDK / HID Auth Bridge
+// U.are.U 4500 - DigitalPersona Web SDK / HID Auth Bridge
 //
 // HID Authentication Service exposes a local WebSocket on
 // https://127.0.0.1:52181/get_connection  (DigitalPersona Web SDK handshake)
@@ -527,7 +527,7 @@ async function ensureInsightFaceHealthy() {
 
 async function initReader() {
     const readerUrl = getReaderUrl();
-    setReaderStatus('idle', 'Connecting to fingerprint reader via DigitalPersona bridgeâ€¦');
+    setReaderStatus('idle', 'Connecting to fingerprint reader via DigitalPersona bridge...');
     try {
         const readers = await getFingerprintReader().refreshReaders();
         readerReady = Array.isArray(readers) && readers.length > 0;
@@ -571,7 +571,7 @@ Object.entries(EXISTING_FINGERS).forEach(([f, exists]) => {
     if (exists === 'true') {
         capturedFingers[f] = true;
         const ind = document.getElementById('indicator-' + f);
-        if (ind) ind.textContent = 'âœ“';
+        if (ind) ind.textContent = '\u2713';
     }
 });
 
@@ -657,7 +657,7 @@ async function handleFingerprintSample(result) {
             qualityBar.style.width = q + '%';
             qualityBar.style.background = q >= 60 ? 'var(--signal)' : q >= 40 ? 'var(--amber)' : 'var(--danger)';
         }
-        document.getElementById('qualityLabel').textContent = 'Quality: ' + q + '% â€” ' + (q >= 60 ? 'Good' : q >= 40 ? 'Acceptable' : 'Poor â€” re-scan');
+        document.getElementById('qualityLabel').textContent = 'Quality: ' + q + '% \u2014 ' + (q >= 60 ? 'Good' : q >= 40 ? 'Acceptable' : 'Poor \u2014 re-scan');
         document.getElementById('minutiaeCount')?.style && (document.getElementById('minutiaeCount').style.display = 'block');
         const minutiaeCountEl = document.getElementById('minutiaeCount');
         if (minutiaeCountEl) {
@@ -693,7 +693,7 @@ async function handleFingerprintSample(result) {
         }
 
         const indicator = document.getElementById('indicator-' + selectedFinger);
-        if (indicator) indicator.textContent = 'âœ“';
+        if (indicator) indicator.textContent = '\u2713';
         const fingerButton = document.getElementById('fbtn-' + selectedFinger);
         if (fingerButton) fingerButton.classList.add('captured');
 
@@ -738,23 +738,23 @@ async function captureFingerprint() {
 
     const scanBtn = document.getElementById('scanBtn');
     scanBtn.disabled = true;
-    document.getElementById('scanBtnLabel').textContent = 'Scanningâ€¦';
+    document.getElementById('scanBtnLabel').textContent = 'Scanning...';
     document.getElementById('scanProgress').style.display = 'flex';
-    document.getElementById('scanProgressMsg').textContent = 'Place ' + selectedFinger + ' finger on sensorâ€¦';
+    document.getElementById('scanProgressMsg').textContent = 'Place ' + selectedFinger + ' finger on sensor...';
     document.getElementById('scanResult').style.display = 'none';
     document.getElementById('scanOverlay').style.display = 'flex';
-    document.getElementById('scanMsg').textContent = 'Place ' + selectedFinger + ' finger on the sensor';
+    document.getElementById('scanMsg').textContent = 'Place ' + selectedFinger + ' finger on the sensor...';
     document.getElementById('qualityMeter').style.display = 'none';
     document.getElementById('minutiaeCount').style.display = 'none';
 
-    setReaderStatus('scanning', 'Scanning ' + selectedFinger + ' fingerâ€¦');
+    setReaderStatus('scanning', 'Scanning ' + selectedFinger + ' finger...');
 
     try {
         const result = await getFingerprintReader().acquire(Fingerprint.SampleFormat.PngImage, 15000);
 
-        // Success â€” draw ridge pattern from WSQ data
+        // Success - draw ridge pattern from WSQ data
         document.getElementById('scanProgress').style.display = 'none';
-        setReaderStatus('ready', 'Capture successful â€” U.are.U 4500 ready');
+        setReaderStatus('ready', 'Capture successful - U.are.U 4500 ready');
 
         if (result.sample) {
             await drawFingerprintRidges(result.sample, result.quality);
@@ -767,7 +767,7 @@ async function captureFingerprint() {
         document.getElementById('qualityMeter').style.display = 'block';
         document.getElementById('qualityBar').style.width = q + '%';
         document.getElementById('qualityBar').style.background = q >= 60 ? 'var(--signal)' : q >= 40 ? 'var(--amber)' : 'var(--danger)';
-        document.getElementById('qualityLabel').textContent = 'Quality: ' + q + '% â€” ' + (q >= 60 ? 'Good' : q >= 40 ? 'Acceptable' : 'Poor â€” re-scan');
+        document.getElementById('qualityLabel').textContent = 'Quality: ' + q + '% \u2014 ' + (q >= 60 ? 'Good' : q >= 40 ? 'Acceptable' : 'Poor \u2014 re-scan');
         document.getElementById('minutiaeCount').style.display = 'block';
         document.getElementById('minutiaeCount').textContent = (result.minutiaeCount || '?') + ' minutiae detected';
 
@@ -788,7 +788,7 @@ async function captureFingerprint() {
         }
 
         const indicator = document.getElementById('indicator-' + selectedFinger);
-        if (indicator) indicator.textContent = 'âœ“';
+        if (indicator) indicator.textContent = '\u2713';
         document.getElementById('fbtn-' + selectedFinger).classList.add('captured');
 
         updateCaptureStatus();
@@ -806,7 +806,7 @@ async function captureFingerprint() {
 
     } catch(e) {
         document.getElementById('scanProgress').style.display = 'none';
-        setReaderStatus('ready', 'Ready â€” last capture failed');
+        setReaderStatus('ready', 'Ready - last capture failed');
         showScanResult('error', 'Capture failed: ' + e.message);
         drawErrorPattern();
     }
@@ -823,7 +823,7 @@ function updateCaptureStatus() {
     if (captureCount >= 2) {
         document.getElementById('fp_captured').value = '1';
         badge.className   = 'badge badge--success';
-        badge.textContent = 'Thumb + Index Captured âœ“';
+        badge.textContent = 'Thumb + Index Captured \u2713';
     } else if (captureCount > 0) {
         badge.className   = 'badge badge--amber';
         badge.textContent = captureCount + '/2 Captured';
@@ -845,7 +845,7 @@ function clearCurrentFinger() {
         captureCount = Math.max(0, captureCount - 1);
     }
     const indicator = document.getElementById('indicator-' + selectedFinger);
-    if (indicator) indicator.textContent = 'Â·';
+    if (indicator) indicator.textContent = '\u00B7';
     const fingerButton = document.getElementById('fbtn-' + selectedFinger);
     if (fingerButton) fingerButton.classList.remove('captured');
     updateCaptureStatus();
@@ -904,7 +904,7 @@ async function drawFingerprintRidges(wsqBase64, quality) {
             img.src = 'data:image/png;base64,' + wsqBase64;
         });
     } catch {
-        // WSQ not renderable as PNG â€” draw procedural ridge pattern
+        // WSQ not renderable as PNG  draw procedural ridge pattern
         drawMinutiaePattern(Math.floor(30 + quality * 0.4));
         overlay.style.display = 'none';
     }
@@ -987,8 +987,8 @@ function drawMinutiaePattern(minutiaeCount) {
     // Legend
     ctx.font      = '10px DM Mono, monospace';
     ctx.fillStyle = '#555A72';
-    ctx.fillText('â— Ridge ending', 12, H - 28);
-    ctx.fillText('â–² Bifurcation', 12, H - 14);
+    ctx.fillText('\u25CF Ridge ending', 12, H - 28);
+    ctx.fillText('\u25B2 Bifurcation', 12, H - 14);
     ctx.fillText(minutiaeCount + ' minutiae', W - 90, H - 14);
 
     document.getElementById('scanOverlay').style.display = 'none';
@@ -1001,7 +1001,7 @@ function drawErrorPattern() {
     ctx.fillStyle = 'rgba(255,75,85,.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     document.getElementById('scanOverlay').style.display = 'flex';
-    document.getElementById('scanMsg').textContent = 'Scan failed â€” try again';
+    document.getElementById('scanMsg').textContent = 'Scan failed - try again';
 }
 
 let scanLineY = 0, scanLineAnim = null;
@@ -1030,7 +1030,7 @@ function animateScanLine() {
 }
 
 // ============================================================
-// FACE ENROLLMENT â€” face-api.js FaceNet 128-dim descriptor extraction
+// FACE ENROLLMENT - face-api.js FaceNet 128-dim descriptor extraction
 // ============================================================
 let faceStream    = null;
 let faceApiLoaded = false;
@@ -1056,7 +1056,7 @@ async function loadFaceApi() {
 }
 
 async function startCamera() {
-    document.getElementById('faceStatus').textContent = 'Loading modelsâ€¦';
+    document.getElementById('faceStatus').textContent = 'Loading models...';
     document.getElementById('faceStatus').className   = 'badge badge--amber';
     try {
         await loadFaceApi();
@@ -1119,7 +1119,7 @@ function startFaceDetectionLoop() {
         faceapi.draw.drawFaceLandmarks(canvas, detections);
         if (detections.length === 1) {
             document.getElementById('faceStatus').className   = 'badge badge--signal';
-            document.getElementById('faceStatus').textContent = 'Face Detected âœ“';
+            document.getElementById('faceStatus').textContent = 'Face Detected \u2713';
         } else if (detections.length === 0) {
             document.getElementById('faceStatus').className   = 'badge badge--amber';
             document.getElementById('faceStatus').textContent = 'No Face Detected';
@@ -1156,7 +1156,7 @@ async function captureEnrollFace() {
     previewImg.src = snapshot;
 
     document.getElementById('faceStatus').className   = 'badge badge--amber';
-    document.getElementById('faceStatus').textContent = 'Detecting faceâ€¦';
+            document.getElementById('faceStatus').textContent = 'Detecting face...';
 
     try {
         if (!faceApiLoaded) throw new Error('Models not loaded');
@@ -1194,7 +1194,7 @@ async function captureEnrollFace() {
         }
 
         document.getElementById('faceStatus').className   = 'badge badge--success';
-        document.getElementById('faceStatus').textContent = 'Face Enrolled âœ“ (512-dim)';
+        document.getElementById('faceStatus').textContent = 'Face Enrolled \u2713 (512-dim)';
 
         if (faceDetectInterval) clearInterval(faceDetectInterval);
         if (faceStream) faceStream.getTracks().forEach(t => t.stop());
@@ -1251,4 +1251,5 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <?php require_once __DIR__ . '/../../includes/footer.php'; ?>
+
 
