@@ -11,29 +11,7 @@ define('APP_FULL_NAME', 'Biometric Examination Authentication System');
 define('APP_INSTITUTION', 'Federal University Oye-Ekiti');
 define('APP_DEPARTMENT', 'Department of Computer Engineering');
 define('APP_VERSION', '1.0.0');
-function beasDetectAppUrl(): string {
-    $env = trim((string) getenv('APP_URL'));
-    if ($env !== '') {
-        return rtrim($env, '/');
-    }
-
-    if (PHP_SAPI === 'cli') {
-        return 'https://tikearn.org.ng/beas';
-    }
-
-    $https = strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? $_SERVER['REQUEST_SCHEME'] ?? (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http')));
-    $scheme = $https === 'https' ? 'https' : 'http';
-    $host = (string) ($_SERVER['HTTP_HOST'] ?? 'localhost');
-    $script = (string) ($_SERVER['SCRIPT_NAME'] ?? '');
-    $basePath = rtrim(str_replace('\\', '/', dirname($script)), '/.');
-    if ($basePath === '/' || $basePath === '\\' || $basePath === '.') {
-        $basePath = '';
-    }
-
-    return rtrim($scheme . '://' . $host . $basePath, '/');
-}
-
-define('APP_URL', beasDetectAppUrl());
+define('APP_URL', getenv('APP_URL') ?: 'https://beas-live.onrender.com');
 
 define('SESSION_LIFETIME', 3600);
 
